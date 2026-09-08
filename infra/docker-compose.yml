@@ -39,8 +39,14 @@ services:
   mariadb:
     image: mariadb:11.5
     restart: unless-stopped
-    ports:
-      - "3306:3306"
+    # No host port on purpose. The bot connects over app-tier as VZ_DB_HOST=mariadb, so publishing
+    # 3306 bought nothing except a collision with anything else already bound to it on the host —
+    # and it put the database on 0.0.0.0 of a public server.
+    #
+    # For a shell:
+    #   docker compose -f ~/infra/docker-compose.yml exec mariadb mariadb -u root -p
+    # For a GUI client, bind to loopback only and tunnel — never back to "3306:3306":
+    #   ports: ["127.0.0.1:3306:3306"]   then   ssh -L 3306:localhost:3306 <server>
     networks:
       - app-tier
     environment:
