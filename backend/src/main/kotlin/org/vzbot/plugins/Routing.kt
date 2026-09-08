@@ -33,6 +33,7 @@ val geoClient = HttpClient(CIO) {
 fun Application.configureRouting() {
     routing {
         default()
+        health()
         serials()
         printers()
         blogs()

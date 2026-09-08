@@ -12,12 +12,15 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+    # /health reports the Discord gateway and database, unlike /status which only counted rows.
+    # Note that Docker never restarts an unhealthy container — this only gates the frontend's
+    # depends_on. Recovery comes from the bot's own watchdog exiting into `restart: unless-stopped`.
     healthcheck:
-      test: ["CMD", "curl", "-f", "-H", "token: ${BACKEND_TOKEN}", "http://localhost:8080/status"]
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
       interval: 15s
       timeout: 5s
       retries: 5
-      start_period: 30s
+      start_period: 60s
 
   frontend:
     image: ghcr.io/vzbot3d/vzbot-nuxt:${FRONTEND_TAG:-latest}

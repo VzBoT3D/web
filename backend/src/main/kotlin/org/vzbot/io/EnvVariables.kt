@@ -24,6 +24,12 @@ enum class EnvVariables(
 
     VZ_WEBSITE_URL(EnvType.STRING),
 
+    /** dead man's switch pinged while the bot is healthy — see [org.vzbot.health.Heartbeat] */
+    VZ_HEARTBEAT_URL(EnvType.STRING, default = "", requiresNonEmpty = false),
+
+    /** Discord webhook for outage alerts — see [org.vzbot.health.AlertNotifier] */
+    VZ_ALERT_WEBHOOK_URL(EnvType.STRING, default = "", requiresNonEmpty = false),
+
     VZ_DB_USER(EnvType.STRING),
     VZ_DB_PASSWORD(EnvType.STRING, requiresNonEmpty = true),
     VZ_DB_HOST(EnvType.STRING),

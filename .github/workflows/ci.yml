@@ -92,6 +92,8 @@ jobs:
           VZ_SERIAL_BASE_PLATE_HOST_PATH=${{ vars.VZ_SERIAL_BASE_PLATE_HOST_PATH }}
           VZ_SERIAL_NUMBER_PLATES_HOST_PATH=${{ vars.VZ_SERIAL_NUMBER_PLATES_HOST_PATH }}
           VZ_WEBSITE_URL=${{ vars.VZ_WEBSITE_URL }}
+          VZ_HEARTBEAT_URL=${{ secrets.VZ_HEARTBEAT_URL }}
+          VZ_ALERT_WEBHOOK_URL=${{ secrets.VZ_ALERT_WEBHOOK_URL }}
           VZ_DB_USER=${{ secrets.VZ_DB_USER }}
           VZ_DB_ROOT_PASSWORD=${{ secrets.VZ_DB_ROOT_PASSWORD }}
           VZ_DB_HOST=mariadb
